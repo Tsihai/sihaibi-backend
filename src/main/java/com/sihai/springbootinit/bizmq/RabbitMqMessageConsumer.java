@@ -1,6 +1,7 @@
 package com.sihai.springbootinit.bizmq;
 
 import com.rabbitmq.client.Channel;
+import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.amqp.support.AmqpHeaders;
@@ -24,6 +25,7 @@ public class RabbitMqMessageConsumer {
      * @param channel
      * @param deliveryTag
      */
+    @SneakyThrows
     @RabbitListener(queues = {"demo_queue"}, ackMode = "MANUAL")
     private void receiveMessage(String message, Channel channel, @Header(AmqpHeaders.DELIVERY_TAG) long deliveryTag){
       log.info("receiveMessage = {}",message);

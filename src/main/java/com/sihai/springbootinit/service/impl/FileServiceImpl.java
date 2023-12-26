@@ -8,7 +8,7 @@ import com.qcloud.cos.model.ObjectMetadata;
 import com.qcloud.cos.model.PutObjectRequest;
 import com.qcloud.cos.region.Region;
 import com.sihai.springbootinit.service.FileService;
-import com.sihai.springbootinit.utils.FileUtils;
+import com.sihai.springbootinit.utils.cos.FileUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 

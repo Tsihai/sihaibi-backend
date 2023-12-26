@@ -12,10 +12,11 @@
             <result property="questionStatus" column="questionStatus" jdbcType="VARCHAR"/>
             <result property="createTime" column="createTime" jdbcType="TIMESTAMP"/>
             <result property="updateTime" column="updateTime" jdbcType="TIMESTAMP"/>
+            <result property="isDelete" column="isDelete" jdbcType="TINYINT"/>
     </resultMap>
 
     <sql id="Base_Column_List">
         id,input_message,is_user,
-        user_id,createTime,updateTime
+        user_id,createTime,updateTime,isDelete
     </sql>
 </mapper>

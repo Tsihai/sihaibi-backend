@@ -85,6 +85,20 @@ create table if not exists ai_frequency
     isDelete        tinyint  default 0                 not null comment '是否删除'
 ) comment 'ai调用次数表' collate = utf8mb4_unicode_ci;
 
+-- 讯飞 AI
+create table if not exists ai_assistant
+(
+    id             bigint auto_increment comment 'id' primary key,
+    inputMessage   varchar(256)                           null comment '用户输入信息',
+    aiResult   text                                   null comment 'AI生成的信息',
+    questionStatus varchar(128) default 'wait'            not null default 'wait' comment 'wait-等待,running-生成中,succeed-成功生成,failed-生成失败',
+    execMessage    text                                   null comment '执行信息',
+    userId         bigint                                 null comment '创建用户 id',
+    createTime     datetime     default CURRENT_TIMESTAMP not null comment '创建时间',
+    updateTime     datetime     default CURRENT_TIMESTAMP not null on update CURRENT_TIMESTAMP comment '更新时间',
+    isDelete       tinyint      default 0                 not null comment '是否删除'
+    ) comment '讯飞 AI' collate = utf8mb4_unicode_ci;
+
 -- 订单表
 create table if not exists ai_frequency_order
 (
