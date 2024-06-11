@@ -1,7 +1,6 @@
 package com.sihai.springbootinit.bizmq;
 
-import com.sihai.springbootinit.constant.BiMqConstant;
-import com.sihai.springbootinit.constant.ImageMqConstant;
+import com.sihai.springbootinit.constant.Mq.ImageMqConstant;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.stereotype.Component;
 

@@ -8,7 +8,7 @@ import com.sihai.springbootinit.constant.BiMqConstant;
 import java.util.HashMap;
 import java.util.Map;
 
-import static com.sihai.springbootinit.constant.BiMqConstant.*;
+import static com.sihai.springbootinit.constant.Mq.BiChartMqConstant.*;
 
 /**
  * @author sihai
@@ -20,14 +20,14 @@ public class BiMqInit {
         try {
             ConnectionFactory factory = new ConnectionFactory();
             // 设置 rabbitmq 对应的信息
-            factory.setHost(BiMqConstant.BI_MQ_HOST);
-            factory.setUsername(BiMqConstant.BI_MQ_USERNAME);
-            factory.setPassword(BiMqConstant.BI_MQ_PASSWORD);
+            factory.setHost(BiMqConstant.MQ_HOST);
+            factory.setUsername(BiMqConstant.MQ_USERNAME);
+            factory.setPassword(BiMqConstant.MQ_PASSWORD);
 
             Connection connection = factory.newConnection();
             Channel channel = connection.createChannel();
-            String biExchange = BiMqConstant.BI_EXCHANGE_NAME;
-            channel.exchangeDeclare(biExchange, BiMqConstant.BI_DIRECT_EXCHANGE);
+            String biExchange = BI_EXCHANGE_NAME;
+            channel.exchangeDeclare(biExchange, BI_DIRECT_EXCHANGE);
 
             // 创建BI分析队列
             String queueName = BI_QUEUE;
@@ -37,7 +37,7 @@ public class BiMqInit {
             map.put("x-dead-letter-exchange", BI_DLX_EXCHANGE_NAME);
             map.put("x-dead-letter-routing-key", BI_DLX_ROUTING_KEY);
             channel.queueDeclare(queueName,true,false,false,map);
-            channel.queueBind(queueName,BiMqConstant.BI_EXCHANGE_NAME,BI_ROUTING_KEY);
+            channel.queueBind(queueName,BI_EXCHANGE_NAME,BI_ROUTING_KEY);
 
             //创建死信队列和死信交换机
             //创建死信队列

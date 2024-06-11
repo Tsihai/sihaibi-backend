@@ -184,6 +184,11 @@ public class AiIntelligentController {
         return ResultUtils.success(b);
     }
 
+    /**
+     * 获取睡眠时间策略
+     * @param message
+     * @return
+     */
     public static int getSleepTimeStrategy(String message){
         int length = message.length();
         if(length<20){

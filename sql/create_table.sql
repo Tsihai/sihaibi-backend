@@ -55,6 +55,18 @@ create table if not exists chart
     isDelete    tinyint      default 0                 not null comment '是否删除'
 ) comment '图表信息表' collate = utf8mb4_unicode_ci;
 
+-- 讯飞AI回复信息表
+create table if not exists ai_intelligent
+(
+    id             bigint auto_increment comment 'id' primary key,
+    inputMessage   text                                   null comment '用户输入信息',
+    aiResult       text                                   null comment 'AI生成的信息',
+    userId         bigint                                 null comment '创建用户 id',
+    questionStatus varchar(128) default 'wait'            not null comment 'wait-等待,running-生成中,succeed-成功生成,failed-生成失败',
+    createTime     datetime     default CURRENT_TIMESTAMP not null comment '创建时间',
+    updateTime     datetime     default CURRENT_TIMESTAMP not null on update CURRENT_TIMESTAMP comment '更新时间',
+    isDelete       tinyint      default 0                 not null comment '是否删除'
+) comment '讯飞AI回复信息表' collate = utf8mb4_unicode_ci;
 
 -- AI 问答助手表
 create table if not exists ai_assistant
@@ -90,14 +102,31 @@ create table if not exists ai_assistant
 (
     id             bigint auto_increment comment 'id' primary key,
     inputMessage   varchar(256)                           null comment '用户输入信息',
-    aiResult   text                                   null comment 'AI生成的信息',
+    aiResult       text                                   null comment 'AI生成的信息',
     questionStatus varchar(128) default 'wait'            not null default 'wait' comment 'wait-等待,running-生成中,succeed-成功生成,failed-生成失败',
     execMessage    text                                   null comment '执行信息',
     userId         bigint                                 null comment '创建用户 id',
     createTime     datetime     default CURRENT_TIMESTAMP not null comment '创建时间',
     updateTime     datetime     default CURRENT_TIMESTAMP not null on update CURRENT_TIMESTAMP comment '更新时间',
     isDelete       tinyint      default 0                 not null comment '是否删除'
-    ) comment '讯飞 AI' collate = utf8mb4_unicode_ci;
+) comment '讯飞 AI' collate = utf8mb4_unicode_ci;
+
+
+-- 图片分析表
+CREATE TABLE IF NOT EXISTS image
+(
+    id          BIGINT AUTO_INCREMENT COMMENT 'id' PRIMARY KEY,
+    goal        VARCHAR(255)                           NULL COMMENT '目标',
+    imageType   VARCHAR(255)                           NULL COMMENT '图片类型',
+    genResult   text                                   NULL COMMENT '生成结果',
+    execMessage text                                   NULL COMMENT '执行信息',
+    state       VARCHAR(128) DEFAULT 'wait'            NOT NULL COMMENT '状态',
+    baseString  VARCHAR(255)                           NULL COMMENT '基础字符串',
+    createTime  TIMESTAMP    DEFAULT CURRENT_TIMESTAMP NOT NULL COMMENT '创建时间',
+    updateTime  TIMESTAMP    DEFAULT CURRENT_TIMESTAMP NOT NULL ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
+    isDelete    TINYINT      DEFAULT 0                 NOT NULL COMMENT '是否删除'
+) COMMENT '图像生成信息表' COLLATE = utf8mb4_unicode_ci;
+
 
 -- 订单表
 create table if not exists ai_frequency_order

@@ -17,6 +17,8 @@ import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
 
+import static com.sihai.springbootinit.constant.Mq.BiChartMqConstant.BI_DLX_QUEUE_NAME;
+
 /**
  * Bi 消息失败消费者
  * @author sihai
@@ -37,7 +39,7 @@ public class BiMessageFailConsumer {
      * @param dekivery
      */
     @SneakyThrows
-    @RabbitListener(queues = {BiMqConstant.BI_DLX_QUEUE_NAME}, ackMode = "MANUAL")
+    @RabbitListener(queues = {BI_DLX_QUEUE_NAME}, ackMode = "MANUAL")
     public void receiveMessage(String message, Channel channel, @Header(AmqpHeaders.DELIVERY_TAG) long dekivery) {
         // 接收到失败的信息，
         log.info("死信队列receiveMessage message{}", message);

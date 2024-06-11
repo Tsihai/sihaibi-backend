@@ -2,7 +2,6 @@ package com.sihai.springbootinit.bizmq;
 
 import com.rabbitmq.client.Channel;
 import com.sihai.springbootinit.common.ErrorCode;
-import com.sihai.springbootinit.constant.BiMqConstant;
 import com.sihai.springbootinit.exception.BusinessException;
 import com.sihai.springbootinit.manager.AiManager;
 import com.sihai.springbootinit.model.entity.Chart;
@@ -19,6 +18,7 @@ import org.springframework.stereotype.Component;
 import javax.annotation.Resource;
 
 import static com.sihai.springbootinit.constant.ChartConstant.*;
+import static com.sihai.springbootinit.constant.Mq.BiChartMqConstant.BI_QUEUE;
 
 /**
  * @author sihai
@@ -43,7 +43,7 @@ public class BiMqMessageConsumer {
      * @param deliveryTag
      */
     @SneakyThrows
-    @RabbitListener(queues = {BiMqConstant.BI_QUEUE}, ackMode = "MANUAL")
+    @RabbitListener(queues = {BI_QUEUE}, ackMode = "MANUAL")
     private void receiveMessage(String message, Channel channel, @Header(AmqpHeaders.DELIVERY_TAG) long deliveryTag) {
         log.info("receiveMessage message={}", message);
         if (StringUtils.isBlank(message)) {

@@ -3,12 +3,13 @@ package com.sihai.springbootinit.bizmq;
 import com.rabbitmq.client.Channel;
 import com.rabbitmq.client.Connection;
 import com.rabbitmq.client.ConnectionFactory;
-import com.sihai.springbootinit.constant.ImageMqConstant;
+import com.sihai.springbootinit.constant.BiMqConstant;
+import com.sihai.springbootinit.constant.Mq.ImageMqConstant;
 
 import java.util.HashMap;
 import java.util.Map;
 
-import static com.sihai.springbootinit.constant.ImageMqConstant.*;
+import static com.sihai.springbootinit.constant.Mq.ImageMqConstant.*;
 
 /*** 用于创建测试程序用到的交换机和队列（只用在程序启动前执行一次）*/
 public class ImageMqInit {
@@ -17,9 +18,9 @@ public class ImageMqInit {
         try {
             ConnectionFactory factory = new ConnectionFactory();
             // 设置 rabbitmq 对应的信息
-            factory.setHost(ImageMqConstant.Image_MQ_HOST);
-            factory.setUsername(ImageMqConstant.Image_MQ_USERNAME);
-            factory.setPassword(ImageMqConstant.Image_MQ_PASSWORD);
+            factory.setHost(BiMqConstant.MQ_HOST);
+            factory.setUsername(BiMqConstant.MQ_USERNAME);
+            factory.setPassword(BiMqConstant.MQ_PASSWORD);
 
             Connection connection = factory.newConnection();
             Channel channel = connection.createChannel();

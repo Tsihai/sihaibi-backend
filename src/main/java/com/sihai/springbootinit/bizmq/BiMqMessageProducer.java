@@ -6,6 +6,8 @@ import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
 
+import static com.sihai.springbootinit.constant.Mq.BiChartMqConstant.*;
+
 /**
  * @author sihai
  * CreateTime 2023/6/24 15:53
@@ -22,6 +24,6 @@ public class BiMqMessageProducer {
      * @param message
      */
     public void sendMessage(String message) {
-        rabbitTemplate.convertAndSend(BiMqConstant.BI_EXCHANGE_NAME,BiMqConstant.BI_ROUTING_KEY, message);
+        rabbitTemplate.convertAndSend(BI_EXCHANGE_NAME,BI_ROUTING_KEY, message);
     }
 }

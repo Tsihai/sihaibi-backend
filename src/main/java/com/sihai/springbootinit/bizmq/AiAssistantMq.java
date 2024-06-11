@@ -15,8 +15,8 @@ import org.springframework.stereotype.Component;
 import javax.annotation.Resource;
 import java.io.IOException;
 
-import static com.sihai.springbootinit.constant.BiMqConstant.*;
 import static com.sihai.springbootinit.constant.CommonConstant.AI_MODEL_ID;
+import static com.sihai.springbootinit.constant.Mq.AiChatMqConstant.*;
 
 
 /**
@@ -37,11 +37,11 @@ public class AiAssistantMq {
     private AiAssistantService aiAssistantService;
 
     @RabbitListener(
-            bindings = @QueueBinding(value = @Queue(AI_QUESTION_QUEUE),
-                    exchange = @Exchange(AI_QUESTION_EXCHANGE_NAME),
+            bindings = @QueueBinding(value = @Queue(AI_QUEUE),
+                    exchange = @Exchange(AI_EXCHANGE_NAME),
                     arguments = {
                             @Argument(name = "x-dead-letter-exchange",value = AI_DLX_EXCHANGE_NAME)
-                    }, key = AI_QUESTION_ROUTING_KEY))
+                    }, key = AI_ROUTING_KEY))
     public void handle(Message message, Channel channel) throws IOException {
         AiAssistant aiAssistant = null;
         try {

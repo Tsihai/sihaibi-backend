@@ -17,7 +17,6 @@ import com.sihai.springbootinit.model.dto.aiassistant.*;
 import com.sihai.springbootinit.model.entity.AiAssistant;
 import com.sihai.springbootinit.model.entity.User;
 import com.sihai.springbootinit.model.enums.AiAssistantStatusEnum;
-import com.sihai.springbootinit.model.vo.UserVO;
 import com.sihai.springbootinit.service.AiAssistantService;
 import com.sihai.springbootinit.service.AiFrequencyService;
 import com.sihai.springbootinit.service.UserService;
@@ -35,8 +34,8 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 
-import static com.sihai.springbootinit.constant.BiMqConstant.AI_QUESTION_EXCHANGE_NAME;
-import static com.sihai.springbootinit.constant.BiMqConstant.AI_QUESTION_ROUTING_KEY;
+import static com.sihai.springbootinit.constant.Mq.AiChatMqConstant.*;
+
 
 /**
  * @author sihai
@@ -299,7 +298,7 @@ public class AiAssistantController {
         boolean save = aiAssistantService.save(aiAssistant);
 
         String json = GSON.toJson(aiAssistant);
-        rabbitTemplate.convertAndSend(AI_QUESTION_EXCHANGE_NAME, AI_QUESTION_ROUTING_KEY, json);
+        rabbitTemplate.convertAndSend(AI_EXCHANGE_NAME, AI_ROUTING_KEY, json);
 
         // 调用次数减一
         boolean invokeAutoDecrease = aiFrequencyService.invokeAutoDecrease(loginUser.getId());
